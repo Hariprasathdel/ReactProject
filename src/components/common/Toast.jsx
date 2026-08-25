@@ -1,21 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { Toast as BootstrapToast } from 'react-bootstrap';
 
-const Toast = ({ message, show, onClose, bg = 'bg-primary' }) => {
+const Toast = ({ message, type = 'success' }) => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!isVisible) return null;
+
+  const getColor = () => {
+    switch(type) {
+      case 'success': return '#27ae60';
+      case 'error': return '#e74c3c';
+      case 'warning': return '#f39c12';
+      default: return '#3498db';
+    }
+  };
+
   return (
-    <div className="toast-container position-fixed bottom-0 end-0 p-3">
-      <BootstrapToast 
-        show={show} 
-        onClose={onClose} 
-        delay={2800} 
-        autohide
-        className={`align-items-center text-white border-0 ${bg}`}
+    <div className="toast-container">
+      <div 
+        className="toast-custom"
+        style={{ borderLeftColor: getColor() }}
       >
-        <div className="d-flex">
-          <div className="toast-body">{message}</div>
-          <button type="button" className="btn-close btn-close-white me-2 m-auto" onClick={onClose}></button>
+        <div className="d-flex align-items-center">
+          <span className="me-2">
+            {type === 'success' ? '✅' : type === 'error' ? '❌' : '⚠️'}
+          </span>
+          <span>{message}</span>
         </div>
-      </BootstrapToast>
+      </div>
     </div>
   );
 };
