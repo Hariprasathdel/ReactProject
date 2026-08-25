@@ -1,49 +1,55 @@
 import React, { useState } from 'react';
-import { useCart } from '../../context/CartContext';
+import { Modal, Button, Form } from 'react-bootstrap';
 
-const Login = ({ onLogin }) => {
-  const { login } = useCart();
-  const [email, setEmail] = useState('demo@smartcart.com');
-  const [password, setPassword] = useState('password123');
+const Login = ({ show, onClose }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login();
-    onLogin();
+    // Handle login logic here
+    console.log('Login attempt:', { email, password });
+    onClose();
   };
 
   return (
-    <section id="login" className="mb-5">
-      <h2 className="section-title">Login</h2>
-      <div className="login-card">
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label className="form-label">Email address</label>
-            <input 
-              type="email" 
-              className="form-control" 
+    <Modal show={show} onHide={onClose} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>Login to SmartCart</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="name@example.com" 
+              required
             />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Password</label>
-            <input 
-              type="password" 
-              className="form-control" 
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••" 
+              required
             />
-          </div>
-          <button type="submit" className="btn btn-primary w-100">
-            <i className="bi bi-box-arrow-in-right me-1"></i> Sign in
-          </button>
-          <p className="mt-3 text-center text-secondary small">Demo: click login (any credentials)</p>
-        </form>
-      </div>
-    </section>
+          </Form.Group>
+          <Button variant="primary" type="submit" className="w-100">
+            Login
+          </Button>
+        </Form>
+        <p className="text-center mt-3">
+          <small>
+            Don't have an account? <a href="#" className="text-primary">Sign up</a>
+          </small>
+        </p>
+      </Modal.Body>
+    </Modal>
   );
 };
 

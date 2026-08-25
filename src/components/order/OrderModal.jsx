@@ -1,41 +1,137 @@
-import React from 'react';
-import { Modal } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
+import { useCart } from '../../context/CartContext';
 
-const OrderModal = ({ show, onHide, items, total }) => {
+const OrderModal = ({ show, onClose }) => {
+  const { cartItems, getCartTotal, clearCart } = useCart();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    address: '',
+    city: '',
+    zipCode: '',
+    paymentMethod: 'credit_card'
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Process order
+    console.log('Order placed:', { ...formData, items: cartItems, total: getCartTotal() });
+    clearCart();
+    onClose();
+    alert('Order placed successfully!');
+  };
+
   return (
-    <Modal show={show} onHide={onHide} centered className="rounded-4 border-0 shadow-lg">
-      <div className="modal-content rounded-4 border-0 shadow-lg">
-        <div className="modal-header border-0 pb-0">
-          <h5 className="modal-title fw-bold">
-            <i className="bi bi-receipt me-2 text-primary"></i>Order Details
-          </h5>
-          <button type="button" className="btn-close" onClick={onHide}></button>
-        </div>
-        <div className="modal-body pt-2">
-          <div>
-            {items.map((item, index) => (
-              <div key={index} className="order-detail-item d-flex justify-content-between align-items-center">
-                <div>
-                  <span className="fw-semibold">{item.name}</span>
-                  <span className="text-secondary small ms-2">x1</span>
+    <Modal show={show} onHide={onClose} size="lg" className="order-modal">
+      <Modal.Header closeButton>
+        <Modal.Title>Place Your Order</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Row>
+          <Col lg={7}>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3">
+                <Form.Label>Full Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Address</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+              <Row>
+                <Col md={6}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>City</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="city"
+                      value={formData.city}
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Zip Code</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="zipCode"
+                      value={formData.zipCode}
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Form.Group className="mb-3">
+                <Form.Label>Payment Method</Form.Label>
+                <Form.Select
+                  name="paymentMethod"
+                  value={formData.paymentMethod}
+                  onChange={handleChange}
+                >
+                  <option value="credit_card">Credit Card</option>
+                  <option value="paypal">PayPal</option>
+                  <option value="cash">Cash on Delivery</option>
+                </Form.Select>
+              </Form.Group>
+            </Form>
+          </Col>
+          <Col lg={5}>
+            <div className="order-summary">
+              <h5>Order Summary</h5>
+              {cartItems.map(item => (
+                <div key={item.id} className="d-flex justify-content-between py-2 border-bottom">
+                  <span>{item.name} × {item.quantity}</span>
+                  <span>${(item.price * item.quantity).toFixed(2)}</span>
                 </div>
-                <span className="fw-bold">₹{item.price.toLocaleString()}</span>
+              ))}
+              <div className="order-total d-flex justify-content-between mt-3 pt-2 border-top">
+                <span>Total:</span>
+                <span>${getCartTotal().toFixed(2)}</span>
               </div>
-            ))}
-          </div>
-          <hr />
-          <div className="d-flex justify-content-between fw-bold">
-            <span>Total</span>
-            <span>₹{total.toLocaleString()}</span>
-          </div>
-          <p className="text-secondary small mt-2">
-            <i className="bi bi-check-circle-fill text-success"></i> Order placed successfully!
-          </p>
-        </div>
-        <div className="modal-footer border-0 pt-0">
-          <button className="btn btn-primary rounded-pill px-4" onClick={onHide}>Done</button>
-        </div>
-      </div>
+            </div>
+            <Button 
+              variant="primary" 
+              className="w-100 mt-3"
+              onClick={handleSubmit}
+            >
+              Place Order
+            </Button>
+          </Col>
+        </Row>
+      </Modal.Body>
     </Modal>
   );
 };
