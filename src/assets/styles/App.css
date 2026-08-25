@@ -1,0 +1,189 @@
+body {
+    background: #f8f9fa;
+  }
+  
+  .navbar-brand {
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  
+  .hero-section {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    color: white;
+    padding: 4rem 1rem;
+    border-radius: 0 0 3rem 3rem;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-section h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 1.2rem;
+    transition: 0.25s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+    height: 100%;
+  }
+  
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(13, 110, 253, 0.12);
+  }
+  
+  .card-img-top {
+    padding: 1.2rem 1.2rem 0;
+    height: 180px;
+    object-fit: contain;
+    background: #ffffff;
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
+  
+  .card-body {
+    padding: 1rem 1.2rem 1.2rem;
+  }
+  
+  .card-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  .price-tag {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0d6efd;
+  }
+  
+  .btn-add, .btn-buy {
+    border-radius: 40px;
+    padding: 0.4rem 1.2rem;
+    font-weight: 500;
+    border: none;
+    transition: 0.15s;
+  }
+  
+  .btn-add {
+    background: #0d6efd;
+    color: white;
+  }
+  
+  .btn-add:hover {
+    background: #0b5ed7;
+    color: white;
+  }
+  
+  .btn-buy {
+    background: #28a745;
+    color: white;
+  }
+  
+  .btn-buy:hover {
+    background: #218838;
+    color: white;
+  }
+  
+  .btn-buy i, .btn-add i {
+    margin-right: 6px;
+  }
+  
+  .cart-badge {
+    background: #dc3545;
+    color: white;
+    border-radius: 30px;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 6px;
+  }
+  
+  .offer-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #ff6b35;
+    color: white;
+    font-weight: 600;
+    padding: 0.25rem 0.9rem;
+    border-radius: 40px;
+    font-size: 0.75rem;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+  }
+  
+  .section-title {
+    font-weight: 700;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  
+  .section-title:after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 4px;
+    background: #0d6efd;
+    margin-top: 6px;
+    border-radius: 4px;
+  }
+  
+  .contact-card {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+  }
+  
+  .social-icon {
+    font-size: 1.6rem;
+    color: #495057;
+    transition: 0.15s;
+  }
+  
+  .social-icon:hover {
+    color: #0d6efd;
+  }
+  
+  footer {
+    background: white;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .login-card {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 2rem;
+    background: white;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+  }
+  
+  .toast-container {
+    z-index: 1060;
+  }
+  
+  .order-detail-item {
+    border-bottom: 1px solid #eee;
+    padding: 0.75rem 0;
+  }
+  
+  .order-detail-item:last-child {
+    border-bottom: none;
+  }
+  
+  .cart-preview {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .cart-preview-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .cart-preview-item:last-child {
+    border-bottom: none;
+  }
