@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import OfferCard from '../products/OfferCard';
-import { offers } from '../../data/products';
+import OfferCard from '../products/OffersCard';
+import { offers } from '../../data/productsData';
 
 const OffersSection = () => {
   return (

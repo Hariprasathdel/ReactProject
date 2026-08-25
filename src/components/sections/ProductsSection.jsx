@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import ProductGrid from '../products/ProductGrid';
-import { products } from '../../data/products';
+import { products } from '../../data/productsData';
 import { useCart } from '../../context/CartContext';
 
 const ProductsSection = ({ showToast }) => {

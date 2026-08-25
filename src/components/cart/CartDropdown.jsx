@@ -1,7 +1,7 @@
 import React from 'react';
 import { Offcanvas, Button, ListGroup } from 'react-bootstrap';
 import { useCart } from '../../context/CartContext';
-import OrderModal from '../orders/OrderModal';
+import OrderModal from '../order/OrderModal';
 
 const CartDropdown = ({ show, onClose }) => {
   const { 
